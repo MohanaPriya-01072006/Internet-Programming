@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SwiftCart - Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 350px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #007acc;
+    }
+
+    .login-container input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .login-container button:hover {
+      background-color: #005f91;
+    }
+
+    .login-container .links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-container .links a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    .login-container .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2><i class="fas fa-user-circle"></i> Login to SwiftCart</h2>
+    <form action="index.html" method="post">
+      <input type="text" name="username" placeholder="Username" required /><br />
+      <input type="password" name="password" placeholder="Password" required /><br />
+      <button type="submit">Login</button>
+    </form>
+    <div class="links">
+      <p><a href="#">Forgot Password?</a> | <a href="#">Create Account</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

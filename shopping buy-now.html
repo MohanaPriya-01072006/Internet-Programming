@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SwiftCart - Buy Now</title>
+</head>
+<body style="background-color:#f5faff; font-family:Arial, sans-serif; max-width:500px; margin:50px auto; padding:20px;">
+
+  <h1 style="text-align:center; color:#2874f0;">🛒 Buy Now</h1>
+
+  <form id="orderForm">
+    <label for="name" style="display:block; margin-top:10px;">Full Name:</label>
+    <input type="text" id="name" required style="width:100%; padding:8px; border:1px solid #2874f0; border-radius:4px;">
+
+    <label for="email" style="display:block; margin-top:10px;">Email:</label>
+    <input type="email" id="email" required style="width:100%; padding:8px; border:1px solid #2874f0; border-radius:4px;">
+
+    <label for="address" style="display:block; margin-top:10px;">Address:</label>
+    <textarea id="address" required style="width:100%; padding:8px; border:1px solid #2874f0; border-radius:4px;"></textarea>
+
+    <label for="phone" style="display:block; margin-top:10px;">Phone:</label>
+    <input type="tel" id="phone" required style="width:100%; padding:8px; border:1px solid #2874f0; border-radius:4px;">
+
+    <button type="submit" style="margin-top:15px; background-color:#2874f0; color:white; padding:10px; width:100%; border:none; border-radius:5px;">Place Order</button>
+  </form>
+
+  <div id="orderSuccess" style="display:none; text-align:center; margin-top:20px;">
+    <p style="color:green;">✅ Order placed successfully!</p>
+    <button id="payNowBtn" style="background-color:#2874f0; color:white; padding:10px; border:none; border-radius:5px;">Pay Now</button>
+  </div>
+
+  <div id="paymentSection" style="display:none; margin-top:20px;">
+    <label for="amount">Enter Amount:</label>
+    <input type="number" id="amount" required style="width:100%; padding:8px; border:1px solid #2874f0; border-radius:4px;">
+    <button id="payBtn" style="margin-top:10px; background-color:#2874f0; color:white; padding:10px; width:100%; border:none; border-radius:5px;">Pay</button>
+  </div>
+
+  <script>
+    const form = document.getElementById('orderForm');
+    const orderSuccess = document.getElementById('orderSuccess');
+    const paymentSection = document.getElementById('paymentSection');
+    const payNowBtn = document.getElementById('payNowBtn');
+    const payBtn = document.getElementById('payBtn');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      orderSuccess.style.display = 'block';
+    });
+
+    payNowBtn.addEventListener('click', function() {
+      paymentSection.style.display = 'block';
+    });
+
+    payBtn.addEventListener('click', function() {
+      const amount = document.getElementById('amount').value;
+      if (amount > 0) {
+        window.location.href = 'payment-success.html';
+      } else {
+        alert('Enter a valid amount');
+      }
+    });
+  </script>
+
+</body>
+</html>
