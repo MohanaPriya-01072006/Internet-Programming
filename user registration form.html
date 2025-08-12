@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>User Registration Form</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+    .container {
+        max-width: 520px;
+        width: 100%;
+        background: #fff;
+        padding: 30px 35px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+    }
+    label {
+        font-weight: 600;
+        display: block;
+        margin-top: 15px;
+        color: #444;
+    }
+    input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 6px;
+        border: 1.8px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+    input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=tel]:focus, input[type=date]:focus, select:focus, textarea:focus {
+        border-color: #74b9ff;
+        outline: none;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .box-group {
+        border: 1.5px solid #74b9ff;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-top: 15px;
+        background: #f9fbff;
+    }
+    .box-group label {
+        margin-top: 0;
+        font-weight: 600;
+        color: #0984e3;
+    }
+    .option-item {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 20px;
+        font-weight: 500;
+        color: #2d3436;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+    .option-item input[type=radio],
+    .option-item input[type=checkbox] {
+        margin-right: 8px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .btn {
+        background-color: #0984e3;
+        color: white;
+        padding: 14px;
+        margin-top: 30px;
+        border: none;
+        border-radius: 7px;
+        width: 100%;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+        background-color: #74b9ff;
+    }
+    #submissionDate {
+        margin-top: 25px;
+        font-weight: 700;
+        color: #2d3436;
+        text-align: center;
+        font-size: 16px;
+        letter-spacing: 0.6px;
+    }
+</style>
+<script>
+function validation(form) {
+    // Full Name - at least 2 words letters only
+    var fullNamePattern = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+    var fullname = form.fullname.value.trim();
+    if (!fullNamePattern.test(fullname)) {
+        alert("Please enter your full name (at least first and last name, letters only).");
+        form.fullname.focus();
+        return false;
+    }
+
+    // Username: letters, digits, underscore only
+    var namePattern = /^\w+$/;
+    var username = form.username.value.trim();
+    if (!namePattern.test(username)) {
+        alert("Enter a valid username (letters, digits, underscore only)");
+        form.username.focus();
+        return false;
+    }
+
+    // Password min length 6 and confirm password match
+    var password = form.password.value;
+    var cpassword = form.cpassword.value;
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        form.password.focus();
+        return false;
+    }
+    if (password !== cpassword) {
+        alert("Passwords do not match");
+        form.cpassword.focus();
+        return false;
+    }
+
+    // Email validation
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var email = form.email.value.trim();
+    if (!emailPattern.test(email)) {
+        alert("Enter a valid email address");
+        form.email.focus();
+        return false;
+    }
+
+    // Phone number 10 digits
+    var phonePattern = /^[0-9]{10}$/;
+    var phone = form.phone.value.trim();
+    if (!phonePattern.test(phone)) {
+        alert("Enter a valid 10-digit phone number");
+        form.phone.focus();
+        return false;
+    }
+
+    // Credit Card number 16 digits
+    var ccPattern = /^[0-9]{16}$/;
+    var ccNumber = form.creditcard.value.trim();
+    if (!ccPattern.test(ccNumber)) {
+        alert("Enter a valid 16-digit credit card number");
+        form.creditcard.focus();
+        return false;
+    }
+
+    // Date of Birth
+    var dob = form.dob.value;
+    if (!dob) {
+        alert("Please select your Date of Birth");
+        form.dob.focus();
+        return false;
+    }
+
+    // Gender check
+    if (!form.gender.value) {
+        alert("Please select your gender");
+        return false;
+    }
+
+    // User Role check
+    if (!form.userrole.value) {
+        alert("Please select a user role");
+        return false;
+    }
+
+    // Department select
+    if (form.dept.selectedIndex === 0) {
+        alert("Please select your department");
+        form.dept.focus();
+        return false;
+    }
+
+    // Country select
+    if (form.country.selectedIndex === 0) {
+        alert("Please select your country");
+        form.country.focus();
+        return false;
+    }
+
+    // At least one hobby selected
+    var hobbies = form.hobbies;
+    var hobbySelected = false;
+    for (var i = 0; i < hobbies.length; i++) {
+        if (hobbies[i].checked) {
+            hobbySelected = true;
+            break;
+        }
+    }
+    if (!hobbySelected) {
+        alert("Please select at least one hobby");
+        return false;
+    }
+
+    // Agreement checkbox
+    if (!form.agree.checked) {
+        alert("Please agree to the terms and conditions");
+        form.agree.focus();
+        return false;
+    }
+
+    alert("Registration Successful!");
+
+    // Display submission date and time
+    var now = new Date();
+    var dateTimeStr = now.toLocaleString();
+    document.getElementById("submissionDate").innerText = "Form submitted on: " + dateTimeStr;
+
+    return false;  // prevent form submission (for demo)
+}
+</script>
+</head>
+<body>
+<div class="container">
+    <h2>User Registration Form</h2>
+    <form name="form" onsubmit="return validation(this)" novalidate>
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="First Last" pattern="^[A-Za-z]+(\s[A-Za-z]+)+$" required title="Enter your full name with at least first and last name letters only" />
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Letters, digits, underscore only" pattern="^\w+$" required title="Letters, digits, underscore only" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 6 characters" minlength="6" required />
+
+        <label for="cpassword">Confirm Password</label>
+        <input type="password" id="cpassword" name="cpassword" placeholder="Confirm your password" minlength="6" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@mail.com" required />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit phone number" pattern="^\d{10}$" required title="Enter a valid 10-digit phone number" />
+
+        <label for="creditcard">Credit Card Number</label>
+        <input type="text" id="creditcard" name="creditcard" placeholder="16-digit credit card number" maxlength="16" pattern="^\d{16}$" required title="Enter a valid 16-digit credit card number" />
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required />
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" placeholder="Enter your address"></textarea>
+
+        <div class="box-group">
+            <label>Gender</label>
+            <label class="option-item" for="male">
+                <input type="radio" id="male" name="gender" value="male" required /> Male
+            </label>
+            <label class="option-item" for="female">
+                <input type="radio" id="female" name="gender" value="female" /> Female
+            </label>
+            <label class="option-item" for="other">
+                <input type="radio" id="other" name="gender" value="other" /> Other
+            </label>
+        </div>
+
+        <div class="box-group">
+            <label>User Role</label>
+            <label class="option-item" for="role-user">
+                <input type="radio" id="role-user" name="userrole" value="user" required /> User
+            </label>
+            <label class="option-item" for="role-admin">
+                <input type="radio" id="role-admin" name="userrole" value="admin" /> Admin
+            </label>
+            <label class="option-item" for="role-moderator">
+                <input type="radio" id="role-moderator" name="userrole" value="moderator" /> Moderator
+            </label>
+        </div>
+
+        <label for="dept">Department</label>
+        <select id="dept" name="dept" required>
+            <option value="">Select Department</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+        </select>
+
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+        </select>
+
+        <div class="box-group">
+            <label>Hobbies</label>
+            <label class="option-item" for="reading">
+                <input type="checkbox" id="reading" name="hobbies" value="reading" /> Reading
+            </label>
+            <label class="option-item" for="sports">
+                <input type="checkbox" id="sports" name="hobbies" value="sports" /> Sports
+            </label>
+            <label class="option-item" for="music">
+                <input type="checkbox" id="music" name="hobbies" value="music" /> Music
+            </label>
+            <label class="option-item" for="traveling">
+                <input type="checkbox" id="traveling" name="hobbies" value="traveling" /> Traveling
+            </label>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <input type="checkbox" id="agree" name="agree" required />
+            <label for="agree" style="cursor:pointer;">I agree to the terms and conditions</label>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+
+    <div id="submissionDate"></div>
+</div>
+</body>
+</html>
